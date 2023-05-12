@@ -35,7 +35,7 @@ sub run {
 	$self->{'_opts'} = {
 		'd' => undef,
 		'h' => 0,
-		'v' => 1,
+		'v' => 9,
 	};
 	if (! getopts('d:hv:', $self->{'_opts'}) || @ARGV < 2
 		|| $self->{'_opts'}->{'h'}) {
@@ -43,7 +43,7 @@ sub run {
 		print STDERR "Usage: $0 [-d test_dir] [-h] [-v level] [--version] dwg_file1 dwg_file2\n";
 		print STDERR "\t-d test_dir\tTest directory (default is directory in system tmp).\n";
 		print STDERR "\t-h\t\tPrint help.\n";
-		print STDERR "\t-v level\tVerbosity level (default 1, min 0, max 9).\n";
+		print STDERR "\t-v level\tVerbosity level (default 9, min 0, max 9).\n";
 		print STDERR "\t--version\tPrint version.\n";
 		print STDERR "\tdwg_file1\tFirst DWG file to test.\n";
 		print STDERR "\tdwg_file2\tSecond DWG file to test.\n";

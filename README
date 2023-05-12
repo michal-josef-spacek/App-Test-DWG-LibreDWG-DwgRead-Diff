@@ -26,7 +26,7 @@ ARGUMENTS
 
             Verbosity level.
 
-            Default value is 1, min is 0, max is 9.
+            Default value is 9, min is 0, max is 9.
 
     *       "--version"
 
