@@ -1,0 +1,69 @@
+NAME
+    test-dwg-libredwg-dwgread-diff - Application to diff DWG files by
+    LibreDWG dwgread command.
+
+SYNOPSIS
+     test-dwg-libredwg-dwgread-diff [-d test_dir] [-h] [-v level] [--version] dwg_file1 dwg_file2
+
+DESCRIPTION
+    This tool is used to test libredwg dwgread command on two DWG files by
+    diff.
+
+    The process is run dwgread on input DWG files and do diff. If dwgread
+    exits with code different than 0, report it. If dwgread returns some
+    ERROR, report number of ERRORS in run.
+
+ARGUMENTS
+    *       "-d test_dir"
+
+            Test directory. If doesn't exist, create dir in system tmp.
+
+    *       "-h"
+
+            Print help.
+
+    *       "-v level"
+
+            Verbosity level.
+
+            Default value is 1, min is 0, max is 9.
+
+    *       "--version"
+
+            Print version of script.
+
+    *       "dwg_file1"
+
+            First DWG file to test.
+
+    *       "dwg_file2"
+
+            Second DWG file to test.
+
+EXAMPLE
+     test-dwg-libredwg-dwgread-diff __DWG_FILE1__ __DWG_FILE2__
+
+SEE ALSO
+    test-dwg-libredwg-json
+        Script to test DWG file by LibreDWG conversions via JSON.
+
+    test-dwg-libredwg-dwgread
+        Script to test DWG file by LibreDWG dwgread command.
+
+REPOSITORY
+    <https://github.com/michal-josef-spacek/App-Test-DWG-LibreDWG-DwgRead-Di
+    ff>
+
+AUTHOR
+    Michal Josef Špaček <mailto:skim@cpan.org>
+
+    <http://skim.cz>
+
+LICENSE AND COPYRIGHT
+    © 2023 Michal Josef Špaček
+
+    BSD 2-Clause License
+
+VERSION
+    0.01
+
