@@ -76,17 +76,44 @@ sub run {
 
 	# dwgread.
 	my $dwgread1 = "$DR $v $dwg_file1_out";
-	$self->_exec($dwgread1, 'first-dwgread', $self->{'_dwg_file1'});
+	my ($stdout_file1, $stderr_file1) = $self->_exec_dwgread($dwgread1, 'first-dwgread', $self->{'_dwg_file1'});
 	my $dwgread2 = "$DR $v $dwg_file2_out";
-	$self->_exec($dwgread2, 'second-dwgread', $self->{'_dwg_file2'});
+	my ($stdout_file2, $stderr_file2) = $self->_exec_dwgread($dwgread2, 'second-dwgread', $self->{'_dwg_file2'});
 
 	# Diff.
-	# TODO
+	# XXX stdout
+	my $diff = "diff $stderr_file1 $stderr_file2";
+	my ($diff_stdout, $diff_stderr) = $self->_exec_diff($diff, 'diff');
+	if (defined $diff_stdout) {
+		system "cat $diff_stdout";
+	}
 
 	return 0;
 }
 
-sub _exec {
+sub _exec_diff {
+	my ($self, $command, $log_prefix) = @_;
+
+	my ($stdout, $stderr, $exit_code) = capture {
+		system($command);
+	};
+
+	my ($stdout_file, $stderr_file);
+	if ($stdout) {
+		$stdout_file = catfile($self->{'_tmp_dir'},
+			$log_prefix.'-stdout.log');
+		barf($stdout_file, $stdout);
+	}
+	if ($stderr) {
+		$stderr_file = catfile($self->{'_tmp_dir'},
+			$log_prefix.'-stderr.log');
+		barf($stderr_file, $stderr);
+	}
+
+	return ($stdout_file, $stderr_file);
+}
+
+sub _exec_dwgread {
 	my ($self, $command, $log_prefix, $dwg_file) = @_;
 
 	my ($stdout, $stderr, $exit_code) = capture {
@@ -99,13 +126,14 @@ sub _exec {
 		return;
 	}
 
+	my ($stdout_file, $stderr_file);
 	if ($stdout) {
-		my $stdout_file = catfile($self->{'_tmp_dir'},
+		$stdout_file = catfile($self->{'_tmp_dir'},
 			$log_prefix.'-stdout.log');
 		barf($stdout_file, $stdout);
 	}
 	if ($stderr) {
-		my $stderr_file = catfile($self->{'_tmp_dir'},
+		$stderr_file = catfile($self->{'_tmp_dir'},
 			$log_prefix.'-stderr.log');
 		barf($stderr_file, $stderr);
 
@@ -114,7 +142,7 @@ sub _exec {
 		}
 	}
 
-	return;
+	return ($stdout_file, $stderr_file);
 }
 
 1;
