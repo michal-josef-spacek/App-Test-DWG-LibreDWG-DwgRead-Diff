@@ -76,9 +76,9 @@ sub run {
 
 	# dwgread.
 	my $dwgread1 = "$DR $v $dwg_file1_out";
-	$self->_exec($dwgread1, '-dwgread', $self->{'_dwg_file1'});
+	$self->_exec($dwgread1, 'first-dwgread', $self->{'_dwg_file1'});
 	my $dwgread2 = "$DR $v $dwg_file2_out";
-	$self->_exec($dwgread2, '-dwgread', $self->{'_dwg_file2'});
+	$self->_exec($dwgread2, 'second-dwgread', $self->{'_dwg_file2'});
 
 	# Diff.
 	# TODO
