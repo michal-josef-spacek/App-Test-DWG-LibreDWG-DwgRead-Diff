@@ -35,7 +35,7 @@ sub run {
 	$self->{'_opts'} = {
 		'd' => undef,
 		'h' => 0,
-		'v' => 9,
+		'v' => 3,
 	};
 	if (! getopts('d:hv:', $self->{'_opts'}) || @ARGV < 2
 		|| $self->{'_opts'}->{'h'}) {
